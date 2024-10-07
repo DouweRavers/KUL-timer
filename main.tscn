@@ -1,0 +1,120 @@
+[gd_scene load_steps=7 format=3 uid="uid://blstwc0h17b4s"]
+
+[ext_resource type="Texture2D" uid="uid://5vf5ln6dqxcr" path="res://Background.png" id="1_vb1oi"]
+[ext_resource type="Script" path="res://main.gd" id="1_xfds2"]
+[ext_resource type="Theme" uid="uid://c6omcieavcvv1" path="res://theme.tres" id="1_xt76k"]
+[ext_resource type="AudioStream" uid="uid://cmyhln6fuk3vf" path="res://beep.wav" id="4_ja7wx"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4msvi"]
+texture = ExtResource("1_vb1oi")
+texture_margin_left = 350.0
+texture_margin_top = 125.0
+texture_margin_right = 425.0
+texture_margin_bottom = 150.0
+region_rect = Rect2(0, 0, 1874, 973)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hyg5q"]
+font_size = 180
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_xt76k")
+script = ExtResource("1_xfds2")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_4msvi")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TimeDisplay" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "00:00:00"
+label_settings = SubResource("LabelSettings_hyg5q")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Timer instellingen:"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HourSpinBox" type="SpinBox" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+max_value = 23.0
+alignment = 1
+suffix = "u"
+
+[node name="MinuteSpinBox" type="SpinBox" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+max_value = 59.0
+alignment = 1
+suffix = "m"
+
+[node name="SecondSpinBox" type="SpinBox" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+max_value = 59.0
+alignment = 1
+suffix = "s"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Start"
+flat = true
+
+[node name="ContinueButton" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+visible = false
+layout_mode = 2
+text = "Hervat"
+flat = true
+
+[node name="StopButton" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+visible = false
+layout_mode = 2
+text = "Stop"
+flat = true
+
+[node name="RepeatCheckbox" type="CheckBox" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Herhaal"
+
+[node name="BeepAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ja7wx")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="value_changed" from="CenterContainer/VBoxContainer/HBoxContainer/HourSpinBox" to="." method="_on_configure_time_change"]
+[connection signal="value_changed" from="CenterContainer/VBoxContainer/HBoxContainer/MinuteSpinBox" to="." method="_on_configure_time_change"]
+[connection signal="value_changed" from="CenterContainer/VBoxContainer/HBoxContainer/SecondSpinBox" to="." method="_on_configure_time_change"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer2/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer2/ContinueButton" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer2/StopButton" to="." method="_on_stop_button_pressed"]

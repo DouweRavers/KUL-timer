@@ -1,0 +1,14 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://c6omcieavcvv1"]
+
+[ext_resource type="Texture2D" uid="uid://bo0do7trmc2ge" path="res://square-check.png" id="1_vpfrb"]
+[ext_resource type="Texture2D" uid="uid://bdwcye0l6owjf" path="res://square-check(1).png" id="2_slfnk"]
+[ext_resource type="Texture2D" uid="uid://c0x0r820gad88" path="res://square.png" id="3_batfk"]
+[ext_resource type="Texture2D" uid="uid://dh1y6hf87exdc" path="res://square-off.png" id="4_yddt0"]
+
+[resource]
+Button/font_sizes/font_size = 30
+CheckBox/icons/checked = ExtResource("1_vpfrb")
+CheckBox/icons/checked_disabled = ExtResource("2_slfnk")
+CheckBox/icons/unchecked = ExtResource("3_batfk")
+CheckBox/icons/unchecked_disabled = ExtResource("4_yddt0")
+Label/font_sizes/font_size = 50
