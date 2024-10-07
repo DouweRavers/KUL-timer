@@ -106,6 +106,7 @@ flat = true
 layout_mode = 2
 text = "Herhaal"
 
+[connection signal="finished" from="BeepAudio" to="." method="_on_beep_audio_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="value_changed" from="CenterContainer/VBoxContainer/HBoxContainer/HourSpinBox" to="." method="_on_configure_time_change"]
 [connection signal="value_changed" from="CenterContainer/VBoxContainer/HBoxContainer/MinuteSpinBox" to="." method="_on_configure_time_change"]

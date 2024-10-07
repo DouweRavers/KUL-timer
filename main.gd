@@ -7,10 +7,7 @@ func _on_timer_timeout() -> void:
 	time -= 1
 	if time <= 0:
 		$BeepAudio.play()
-		if $CenterContainer/VBoxContainer/HBoxContainer2/RepeatCheckbox.button_pressed: 
-			time = configured_time
-		else:
-			$Timer.stop()
+		_on_stop_button_pressed()
 	set_time_display()
 
 func _on_start_button_pressed() -> void:
@@ -45,4 +42,7 @@ func set_time_display():
 	var minute := time %3600 / 60
 	var second := time % 3600 % 60
 	$CenterContainer/VBoxContainer/TimeDisplay.text = "%02d:%02d:%02d" % [hour, minute, second]
-	
+
+func _on_beep_audio_finished() -> void:
+	if $CenterContainer/VBoxContainer/HBoxContainer2/RepeatCheckbox.button_pressed:
+		_on_start_button_pressed()
