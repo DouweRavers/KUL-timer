@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://main.gd" id="1_xfds2"]
 [ext_resource type="Theme" uid="uid://c6omcieavcvv1" path="res://theme.tres" id="1_xt76k"]
+[ext_resource type="AudioStream" uid="uid://b5d0yftb4ga88" path="res://alarm.mp3" id="3_s3oyc"]
 [ext_resource type="Texture2D" uid="uid://cw7uccj1kaut" path="res://KULEUVEN_BRUGGE_RGB_LOGO.png" id="4_j553g"]
-[ext_resource type="AudioStream" uid="uid://cmyhln6fuk3vf" path="res://beep.wav" id="4_ja7wx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vanpu"]
 bg_color = Color(0.0705882, 0.509804, 0.6, 1)
@@ -21,7 +21,19 @@ theme = ExtResource("1_xt76k")
 theme_override_styles/panel = SubResource("StyleBoxFlat_vanpu")
 script = ExtResource("1_xfds2")
 
+[node name="BeepAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_s3oyc")
+
 [node name="Timer" type="Timer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 19.0
+offset_top = 20.0
+offset_right = 247.026
+offset_bottom = 85.0
+texture = ExtResource("4_j553g")
+expand_mode = 3
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -93,18 +105,6 @@ flat = true
 [node name="RepeatCheckbox" type="CheckBox" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "Herhaal"
-
-[node name="BeepAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_ja7wx")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-offset_left = 19.0
-offset_top = 20.0
-offset_right = 247.026
-offset_bottom = 85.0
-texture = ExtResource("4_j553g")
-expand_mode = 3
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="value_changed" from="CenterContainer/VBoxContainer/HBoxContainer/HourSpinBox" to="." method="_on_configure_time_change"]
