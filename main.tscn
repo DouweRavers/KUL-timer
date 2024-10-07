@@ -1,41 +1,27 @@
 [gd_scene load_steps=7 format=3 uid="uid://blstwc0h17b4s"]
 
-[ext_resource type="Texture2D" uid="uid://5vf5ln6dqxcr" path="res://Background.png" id="1_vb1oi"]
 [ext_resource type="Script" path="res://main.gd" id="1_xfds2"]
 [ext_resource type="Theme" uid="uid://c6omcieavcvv1" path="res://theme.tres" id="1_xt76k"]
+[ext_resource type="Texture2D" uid="uid://cw7uccj1kaut" path="res://KULEUVEN_BRUGGE_RGB_LOGO.png" id="4_j553g"]
 [ext_resource type="AudioStream" uid="uid://cmyhln6fuk3vf" path="res://beep.wav" id="4_ja7wx"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4msvi"]
-texture = ExtResource("1_vb1oi")
-texture_margin_left = 350.0
-texture_margin_top = 125.0
-texture_margin_right = 425.0
-texture_margin_bottom = 150.0
-region_rect = Rect2(0, 0, 1874, 973)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vanpu"]
+bg_color = Color(0.0705882, 0.509804, 0.6, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_hyg5q"]
 font_size = 180
 
-[node name="Main" type="Control"]
-layout_mode = 3
+[node name="Main" type="Panel"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_xt76k")
+theme_override_styles/panel = SubResource("StyleBoxFlat_vanpu")
 script = ExtResource("1_xfds2")
 
 [node name="Timer" type="Timer" parent="."]
-
-[node name="Background" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_4msvi")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -110,6 +96,15 @@ text = "Herhaal"
 
 [node name="BeepAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_ja7wx")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 19.0
+offset_top = 20.0
+offset_right = 247.026
+offset_bottom = 85.0
+texture = ExtResource("4_j553g")
+expand_mode = 3
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="value_changed" from="CenterContainer/VBoxContainer/HBoxContainer/HourSpinBox" to="." method="_on_configure_time_change"]
